@@ -29,3 +29,27 @@ size2([_|T],M) :- size2(T,N), M = s(N).
 % sum(List,Sum)
 sum([],0).
 sum([H|T],M) :- sum(T,N), M is N+H.
+
+% average(List,Average)
+% it uses average(List,Count,Sum,Average)
+average(List,A) :- average(List,0,0,A).
+average([],C,S,A) :- A is S/C.
+average([X|Xs],C,S,A) :-
+C2 is C+1,
+S2 is S+X,
+average(Xs,C2,S2,A).
+
+% ES:2.5
+% max(List,Max)
+% Max is the biggest element in List
+% Suppose the list has at least one element
+max([X|Xs],A) :- max(Xs,X,A).
+max([],A,A).
+%caso in cui trovo un numero più grande
+max([X|Xs],C,A) :-
+C<X,C2 is X,
+max(Xs,C2,A).
+%caso in cui trovo un numero più piccolo
+max([X|Xs],C,A) :-
+C>=X,C2 is C,
+max(Xs,C2,A).
