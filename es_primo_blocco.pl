@@ -108,3 +108,28 @@ seqR2(N2,M,Xs).
 seqR2(-1,_,[]).
 
 
+
+% inv(List,List)
+% example: inv([1,2,3],[3,2,1]).
+inv(Xs,Ys) :-
+inv(Xs,[],Ys). % metto una lista temporanea in mezzo
+inv([X|Xs],T,R) :-  % scorro la prima lista e aggiungo gli elementi alla lista temporanea
+inv(Xs,[X|T],R).
+inv([],R,R).    % mi sono passato tutta la lista
+
+% double(List,List)
+% suggestion: remember predicate append/3
+% example: double([1,2,3],[1,2,3,1,2,3]).
+double([],[]).
+double(List1,List2):-
+append(List1,List1,List2).
+
+% times(List,N,List)
+% example: times([1,2,3],3,[1,2,3,1,2,3,1,2,3]).
+times(List1,N,List2):-times(List1,N,List2,[]).
+times(List1,N,List2,ListTmp):-
+N>0,
+N2 is N-1,
+append(ListTmp,List1,ListTmp2),
+times(List1,N2,List2,ListTmp2).
+times(_,0,R,R).
