@@ -133,3 +133,14 @@ N2 is N-1,
 append(ListTmp,List1,ListTmp2),
 times(List1,N2,List2,ListTmp2).
 times(_,0,R,R).
+
+
+% proj(List,List)
+% example: proj([[1,2],[3,4],[5,6]],[1,3,5]).
+proj([],[]).
+proj([X|Xs],[Y|Ys]):-
+firstOfList(X,Y),
+proj(Xs,Ys).
+firstOfList([X|Xs],X).
+lastOfList([X],X).
+lastOfList([_|Z],X):-lastOfList(Z,X).
