@@ -1,7 +1,61 @@
-\documentclass[10pt,english]{article}
-%\documentclass[10pt,italian]{article} % TO WRITE IN ITALIAN, UNCOMMENT THIS LINE AND COMMENT THE ABOVE ONE
-\usepackage[utf8]{inputenc} % opzione per caratteri ISO-8859-1, CONSENTE L'USO DELLE ACCENTATE
-\usepackage{hyperref}
+%% TeXworks instructions:
+% !TeX root = ./assignment.tex
+% !TEX encoding = UTF-8 Unicode
+% !TEX program = arara
+% !TEX TS-program = arara
+% !TeX spellcheck = en-US
+
+% arara: pdflatex
+% arara: pdflatex: { synctex: yes }
+
+%% Generate a report.xmpdata file with title and authors for PDF/A-compliant format %%
+
+
+\documentclass[
+    a4paper,            % specifica il formato A4 (default: letter)
+    10pt,               % specifica la dimensione del carattere a 10
+    oneside,            % serve per impaginare per stampa solo fronte
+    english]
+    {article}
+
+\usepackage[T1]{fontenc}        % serve per impostare la codifica di output del font
+\usepackage{textcomp}           % serve per fornire supporto ai Text Companion fonts
+\usepackage[utf8]{inputenc}     % serve per impostare la codifica di input del font
+\usepackage[english]{babel}
+\usepackage{lmodern}            % carica una variante Latin Modern prodotto dal GUST
+
+\usepackage[%
+    strict,             % rende tutti gli warning degli errori
+    autostyle,          % imposta lo stile in base al linguaggio specificato in babel
+    english=american    % imposta lo stile per l'inglese
+]{csquotes}                     % serve a impostare lo stile delle virgolette
+
+\usepackage[%
+    depth=3,            % equivale a bookmarksdepth di hyperref
+    open=false,         % equivale a bookmarksopen di hyperref
+    numbered=true       % equivale a bookmarksnumbered di hyperref
+]{bookmark}                     % Gestisce i segnalibri meglio di hyperref
+\usepackage{hyperref}           % Gestisce tutte le cose ipertestuali del pdf
+\hypersetup{%
+    pdfpagemode={UseNone},
+    hidelinks,          % nasconde i collegamenti (non vengono quadrettati)
+    hypertexnames=false,
+    linktoc=all,        % inserisce i link nell'indice
+    unicode=true,       % only Latin characters in Acrobat’s bookmarks
+    pdftoolbar=false,   % show Acrobat’s toolbar?
+    pdfmenubar=false,   % show Acrobat’s menu?
+    plainpages=false,
+    breaklinks,
+    pdfstartview={Fit},
+    pdfauthor={Niccolò Maltoni},
+    pdfcreator={Niccolò Maltoni},
+    pdftitle={Assignment 03 Prolog Report},
+    pdflang={it}
+}
+\usepackage[%
+    english,            % definizione delle lingue da usare
+    nameinlink          % inserisce i link nei riferimenti
+]{cleveref}                     % permette di usare riferimenti migliori dei \ref e dei varioref
 
 % MARGINI LARGHI
 \textwidth 6.3 in % Width of text line.
@@ -14,8 +68,8 @@
     \topskip 0 in
     
 \title{\vspace{-70pt}Assignment 03 -- ``Prolog''\footnote{Produce a documentation according to this template. Try to keep this document in one page, overall work no more than 6-7 hours, do the job yourself, deliver before the exam, consider the possibility of doing it this very week. Erase this and all other footnotes at the end before submitting.}}
-\author{Riccardo Soro, matr: 851004, email: {\url{riccardo.soro@studio.unibo.it}}\\ repo: {\url{https://github.com/riccardosoro/pps2017-asg03-prolog.git}}\footnote{You have to implement some nice code that involves Prolog (be excellent and rely on logic programming, also exercise a multi-paradigm approach if you can): it can be some solution to problems given in lab or some variation of it, it can be some new Prolog code, a mini-JVM-application demoing Java/Scala/Prolog, it can be a better Scala wrapper for tuProlog, or it can be everything else you want and like (just stay within 6-7 hours of work). Please name your project exactly \texttt{pps2017-asg03-prolog}, and perform meaningful commits. Be sure the repo is visible and do not modify it after submission.}}
-\date{04/06/2018}
+\author{Riccardo Soro, matr: 851004, email: {\url{riccardo.soro@studio.unibo.it}}\\ repo: \url{https://github.com/riccardosoro/pps2017-asg03-prolog.git}}
+\date{22/01/2019}
 
 
 \begin{document}
@@ -23,26 +77,35 @@
 \maketitle
 \vspace{-30pt}
 
-\subsection*{Description of the code you provide\footnote{As example we here indicated some possibilities.. depending on time, you could do one or more things.}}
+\subsection*{Description of the code you provide}
+ \begin{itemize}
+            \item
+                Full solution to lab 10 along with final exercises: \texttt{inv}, \texttt{double}, \texttt{times}, \texttt{proj}.
+                \begin{itemize}
+                    \item Necessary time: $\sim$~4 hours
+                \end{itemize}
 
-\begin{itemize}
- \item Full solution to labs 10 and 11, no tic tac toe
- \item \ldots
-\end{itemize}
+            \item
+                Full solution to lab 11, without Tic Tac Toe.
+                \begin{itemize}
+                                       \item Necessary time: $\sim$~4 hours
+                \end{itemize}
+        \end{itemize}
 
-\subsection*{Techniques used\footnote{Please list the LP-related features you believe you have correctly exercised, and hence, understood.}}
+\subsection*{Techniques used}
 
 \begin{itemize}
  \item Prolog search-space abilities
  \item Prolog use of unification and variables
- \item Java-tuProlog integration
- \item Compared monads and LP
  \item \ldots
 \end{itemize}
 
-\subsection*{Self-evaluation\footnote{Add a max 10 lines evaluation of this experience, reporting what you think about Prolog and LP, about what you have learned of it, and about this specific assignment: what went good, what bad, and so on.}}
+\subsection*{Self-evaluation}
 
-\ldots 
+I found this experience very educational.
+Surely 8 hours are not enough to master the language, but it has provided me with a useful basis for the future.
+I liked the prolog because, unlike the languages we are used to, it is more intuitive in some respects (recursive problems).
+In other respects, however, I continue to prefer other languages with which I am more confident.
  
 \end{document}
     
