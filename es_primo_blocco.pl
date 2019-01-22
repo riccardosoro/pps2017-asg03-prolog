@@ -79,3 +79,32 @@ search(X,List),
 sublist(Xs,List).
 sublist([],List).
 
+
+% ES 4.1
+% seq(N,List)
+% example: seq(5,[0,0,0,0,0]).
+seq(0,[]).
+seq(N,[0|T]):- N > 0, N2 is N-1, seq(N2,T).
+%Is it fully relational? NO
+
+% ES 4.2
+% seqR(N,List)
+% example: seqR(4,[4,3,2,1,0]).
+seqR(N,[X|Xs]) :-
+N is X,
+N2 is N-1,
+seqR(N2,Xs).
+seqR(0,[0]).
+
+% ES 4.3
+% seqR2(N,List)
+% example: seqR2(4,[0,1,2,3,4]).
+seqR2(N,List) :- seqR2(N,N,List).
+seqR2(N,M,[X|Xs]):-
+N>=0,
+N is M-X,
+N2 is N-1,
+seqR2(N2,M,Xs).
+seqR2(-1,_,[]).
+
+
