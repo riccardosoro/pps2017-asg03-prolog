@@ -53,3 +53,29 @@ max(Xs,C2,A).
 max([X|Xs],C,A) :-
 C>=X,C2 is C,
 max(Xs,C2,A).
+
+
+% ES 3.1
+% same(List1,List2)
+% are the two lists the same?
+same([],[]).
+same([X|Xs],[X|Ys]):- same(Xs,Ys).
+
+% ES 3.2
+% all_bigger(List1,List2)
+% all elements in List1 are bigger than those in List2, 1 by 1
+% example: all_bigger([10,20,30,40],[9,19,29,39]).
+all_bigger([],[]).
+all_bigger([X|Xs],[Y|Ys]) :-
+X>Y,
+all_bigger(Xs,Ys).
+
+% ES 3.3
+% sublist(List1,List2)
+% List1 should be a subset of List2
+% example: sublist([1,2],[5,3,2,1]).
+sublist([X|Xs],List):-
+search(X,List),
+sublist(Xs,List).
+sublist([],List).
+
