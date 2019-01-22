@@ -144,3 +144,32 @@ proj(Xs,Ys).
 firstOfList([X|Xs],X).
 lastOfList([X],X).
 lastOfList([_|Z],X):-lastOfList(Z,X).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%               LABORATORIO 2
+
+% dropAny(?Elem,?List,?OutList)
+dropAny(X,[X|T],T).
+dropAny(X,[H|Xs],[H|L]):-dropAny(X,Xs,L).
+
+%dropFirst
+dropFirst(X,[X|T],T):-!.
+dropFirst(X,[H|Xs],[H|L]):-dropFirst(X,Xs,L).
+
+
+
+%dropLast
+
+elementNotFound([X|Xs],Y):-
+X \== Y,
+elementNotFound(Xs,Y).
+elementNotFound([],Y).
+
+dropLast(X,[Y|Ys],[Y|Ys2]):-
+X \== Y,
+dropLast(X,Ys,Ys2).
+dropLast(X,[X|Xs],[X|Xs2]):-
+Xs \== Xs2,
+dropLast(X,Xs,Xs2).
+dropLast(X,[X|Xs],Xs):-
+elementNotFound(Xs,X).
