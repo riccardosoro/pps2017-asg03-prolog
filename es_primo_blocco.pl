@@ -215,3 +215,50 @@ dropNode(G2,N,O).
 dropNode(G,N,G):-
 dropAll(e(N,_),G,G),
 dropAll(e(_,N),G,G).
+
+
+% reaching(+Graph, +Node, -List)
+% all the nodes that can be reached in 1 step from Node
+% possibly use findall, looking for e(Node,_) combined
+% with member(?Elem,?List)
+
+reaching([],N,[]).
+reaching([e(Node,Y)|Xs],Node,[Y|Ys]):-
+ reaching(Xs,Node,Ys).
+reaching([e(X,Node)|Xs],Node,[X|Ys]):-
+ reaching(Xs,Node,Ys).
+reaching([e(X,Y)|Xs],Node,List):-
+ reaching(Xs,Node,List).
+
+% anypath(+Graph, +Node1, +Node2, -ListPath)
+% a path from Node1 to Node2
+% if there are many path, they are showed 1-by-1
+
+anypath(Y,X,X,[]).
+
+anypath(Graph, Node1, Node2, [e(Node1,X)|Xs]):-%ho una lista
+ reaching(Graph,Node1,NearNodes),%trovo tutti i nodi a distanza 1
+ !,%evito soluzioni doppie
+ member(X,NearNodes), %controllo che X sia uno di questi
+ dropNode(Graph,Node1,Graph2), %tolgo il nodo vecchio dal grafo (ho fatto un passo avanti!)
+ anypath(Graph2,X,Node2,Xs).
+
+% allreaching(+Graph, +Node, -List)
+% all the nodes that can be reached from Node
+% Suppose the graph is NOT circular!
+% Use findall and anyPath!
+
+allreaching(Graph,Node,[X|Xs]):-
+anypath(Graph,Node,X,_),
+allreaching(Graph,Node,Xs).
+
+
+
+%%%%%%%%%%%%%%%%%%%  extra funcion
+%divisible /2
+divisible(X,Y) :- 0 is X mod Y, !.
+divisible(X,Y) :- X > Y+1, divisible(X, Y+1).
+%isPrime/1
+isPrime(2) :- true,!.
+isPrime(X) :- X < 2,!,false.
+isPrime(X) :- not(divisible(X, 2)).
