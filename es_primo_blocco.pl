@@ -173,3 +173,45 @@ Xs \== Xs2,
 dropLast(X,Xs,Xs2).
 dropLast(X,[X|Xs],Xs):-
 elementNotFound(Xs,X).
+
+
+
+%dropAll
+dropAll(X,[],[]).
+dropAll(X,[X|Xs],L):-!,
+dropAll(X,Xs,L).
+dropAll(X,[H|Xs],[H|L]):-
+dropAll(X,Xs,L).
+
+dropAll2(E, [], []).
+dropAll2(E, [E|T], M):- dropAll2(E,T,M).
+dropAll2(E, [H|T], [H|M]) :- dropAll2(E, T, M), !.
+
+% fromList(+List,-Graph)
+fromList([_],[]).
+fromList([H1,H2|T],[e(H1,H2)|L]):- fromList([H2|T],L).
+
+% fromCircList(+List,-Graph)
+% which implementation?
+
+fromCircList([H|T], G) :- fromCircList([H|T], H, G).
+fromCircList([X], First, [e(X, First)]) :- !.
+fromCircList([H1, H2|T], First, [e(H1, H2)|L]) :- fromCircList([H2|T], First, L).
+
+% dropNode(+Graph, +Node, -OutGraph)
+% drop all edges starting and leaving from a Node
+% use dropAll defined in 1.1
+dropNode(G,N,O):-
+dropAll(e(N,_),G,G2),
+G \== G2 ,
+dropNode(G2,N,O).
+
+dropNode(G,N,O):-
+dropAll(e(N,_),G,G),
+dropAll(e(_,N),G,G2),
+G \== G2,
+dropNode(G2,N,O).
+
+dropNode(G,N,G):-
+dropAll(e(N,_),G,G),
+dropAll(e(_,N),G,G).
